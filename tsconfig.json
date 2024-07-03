@@ -104,5 +104,13 @@
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
-  }
+  },
+  
+  "include": [
+    "src/**/*.ts" // Include all TypeScript files in the 'src' directory
+  ],
+  "exclude": [
+    "node_modules", // Exclude the 'node_modules' directory
+    "dist" // Exclude the 'dist' directory
+  ]
 }
