@@ -9,12 +9,13 @@ export type Inventory = {
 };
 
 export type IProduct = {
-  id: number;
+  id: string;
   name: string;
   description: string;
   price: number;
   category: string;
   tags: string[];
-  variants?: Variant[];
+  variants: Variant[];
   inventory: Inventory;
+  isDeleted: boolean;
 };

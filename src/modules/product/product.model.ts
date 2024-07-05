@@ -1,25 +1,44 @@
-import { Schema, model } from 'mongoose';
-import { IProduct, Inventory, Variant } from './product.interface';
+import { model, Schema } from "mongoose";
+import { Inventory, IProduct, Variant } from "./product.interface";
+
 
 const variantSchema = new Schema<Variant>({
-  type: { type: String },
-  value: { type: String },
+  type: { type: String,  },
+  value: { type: String, },
 });
 
 const inventorySchema = new Schema<Inventory>({
-  quantity: { type: Number, required: true },
-  inStock: { type: Boolean, required: true },
+  quantity: { type: Number,  },
+  inStock: { type: Boolean,  },
 });
 
 const productSchema = new Schema<IProduct>({
-  id: { type: Number, required: true },
-  name: { type: String, required: true },
-  description: { type: String, required: true },
-  price: { type: Number, required: true },
-  category: { type: String, required: true },
-  tags: { type: [String], required: true },
-  variants: { type: [variantSchema] },
-  inventory: { type: inventorySchema, required: true },
+  id: { type: String,  unique: true },
+  name: { type: String, },
+  description: { type: String,  },
+  price: { type: Number, },
+  category: { type: String,  },
+  tags: { type: [String],  },
+  variants: { type: [variantSchema],  },
+  inventory: { type: inventorySchema,  },
+  isDeleted: { type: Boolean, default: false },
 });
 
-export const ProductModel = model<IProduct>('Product', productSchema);
+// protect for delete product fetch
+productSchema.pre("find", function (next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
+productSchema.pre("findOne", function (next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
+productSchema.pre("aggregate", function (next) {
+  this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } });
+  next();
+});
+
+
+export const ProductModel = model<IProduct>("Product", productSchema);
+
+
