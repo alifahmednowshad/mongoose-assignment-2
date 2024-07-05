@@ -113,6 +113,25 @@ const updateProduct = async (req: Request, res: Response) => {
   }
 };
 
+const searchProducts = async (req: Request, res: Response) => {
+  try {
+    const searchTerm = req.query.searchTerm as string;
+    const result = await ProductServices.searchProductsInDB(searchTerm);
+
+    res.status(200).json({
+      success: true,
+      message: `Products matching search term '${searchTerm}' fetched successfully!`,
+      data: result,
+    });
+  } catch (err:any) {
+    res.status(500).json({
+      success: false,
+      message: err.message || "Could not fetch products!",
+      error: err,
+    });
+  }
+};
+
 //delete product from DB
 const deleteProduct = async (req: Request, res: Response) => {
   try {
@@ -132,29 +151,11 @@ const deleteProduct = async (req: Request, res: Response) => {
   }
 };
 
-// const searchProducts = async (req: Request, res: Response) => {
-//   try {
-//     const searchTerm = req.query.searchTerm as string;
-//     const result = await ProductServices.searchProductsFromDB(searchTerm);
-
-//     res.status(200).json({
-//       success: true,
-//       message: `Products matching search term '${searchTerm}' fetched successfully!`,
-//       data: result,
-//     });
-//   } catch (err: any) {
-//     res.status(500).json({
-//       success: false,
-//       message: err.message || "Could not search products!",
-//       error: err,
-//     });
-//   }
-// };
-
 export const ProductControllers = {
   createProduct,
   getAllProducts,
   getSingleProduct,
   updateProduct,
   deleteProduct,
+  searchProducts,
 };

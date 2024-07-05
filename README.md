@@ -46,5 +46,5 @@ npm run dev
 
 
 
-## Thank You by developer Alif Ahmed
+## Thank You by developer Alif Ahmed Nowshad
 

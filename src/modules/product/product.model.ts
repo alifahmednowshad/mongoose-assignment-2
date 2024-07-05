@@ -18,7 +18,7 @@ const inventorySchema = new Schema<Inventory>(
 );
 
 const productSchema = new Schema<IProduct>({
-  id: { type: String, unique: true },
+  id: { type: String, required: true, unique: true },
   name: { type: String },
   description: { type: String },
   price: { type: Number },

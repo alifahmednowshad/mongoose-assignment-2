@@ -30,6 +30,36 @@ const createOrder = async (req: Request, res: Response) => {
   }
 };
 
+// get orders by user email
+const getOrdersByEmail = async (req: Request, res: Response) => {
+  try {
+    const email = req.query.email as string;
+
+    console.log(`Fetching orders for email: ${email}`);
+
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email query parameter is required',
+      });
+    }
+
+    const result = await OrderServices.getOrdersByEmailFromDB(email);
+
+    res.status(200).json({
+      success: true,
+      message: `Orders fetched successfully for user email: ${email}`,
+      data: result,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      success: false,
+      message: err.message || 'Could not fetch orders!',
+      error: err,
+    });
+  }
+};
+
 // get all order from DB
 const getAllOrders = async (req: Request, res: Response) => {
   try {
@@ -69,8 +99,11 @@ const getSingleOrder = async (req: Request, res: Response) => {
   }
 };
 
+
+
 export const OrderControllers = {
   createOrder,
   getAllOrders,
   getSingleOrder,
+  getOrdersByEmail,
 };
