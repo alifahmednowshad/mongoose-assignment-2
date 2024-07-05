@@ -50,26 +50,27 @@ const getAllOrders = async (req: Request, res: Response) => {
 };
 
 // get single order from DB
-// const getSingleOrder = async (req: Request, res: Response) => {
-//   try {
-//     const orderId = req.params.orderId;
-//     const result = await OrderServices.getSingleOrderFromDB(orderId);
+const getSingleOrder = async (req: Request, res: Response) => {
+  try {
+    const orderId = req.params.orderId;
+    const result = await OrderServices.getSingleOrderFromDB(orderId);
 
-//     res.status(200).json({
-//       success: true,
-//       message: "Order fetched successfully!",
-//       data: result,
-//     });
-//   } catch (err: any) {
-//     res.status(500).json({
-//       success: false,
-//       message: err.message || "Could not fetch order!",
-//       error: err,
-//     });
-//   }
-// };
+    res.status(200).json({
+      success: true,
+      message: "Order fetched successfully!",
+      data: result,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      success: false,
+      message: err.message || "Could not fetch order!",
+      error: err,
+    });
+  }
+};
 
 export const OrderControllers = {
   createOrder,
   getAllOrders,
+  getSingleOrder,
 };

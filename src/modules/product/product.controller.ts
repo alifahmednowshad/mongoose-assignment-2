@@ -70,16 +70,26 @@ const getSingleProduct = async (req: Request, res: Response) => {
   }
 };
 
-//update product from DB
+// Update product in DB
 const updateProduct = async (req: Request, res: Response) => {
   try {
     const productId = req.params.productId;
     const productData = req.body;
-    const result = await ProductServices.updateProductFromDB(
-      productId,
-      productData
-    );
 
+    // Validate the incoming product data
+    const { error } = productValidationSchema.validate(productData);
+    if (error) {
+      return res.status(400).json({
+        success: false,
+        message: error.message || "Invalid product data!",
+        error: error.details,
+      });
+    }
+
+    // Update the product in the database
+    const result = await ProductServices.updateProductFromDB(productId, productData);
+
+    // If no product is found with the given ID
     if (!result) {
       return res.status(404).json({
         success: false,
@@ -87,12 +97,14 @@ const updateProduct = async (req: Request, res: Response) => {
       });
     }
 
+    // Respond with success message and updated product data
     res.status(200).json({
       success: true,
       message: "Product updated successfully!",
       data: result,
     });
   } catch (err: any) {
+    // Handle any unexpected errors
     res.status(500).json({
       success: false,
       message: err.message || "Could not update product!",
