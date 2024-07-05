@@ -1,6 +1,6 @@
 # E-commerce API with Express, TypeScript, and MongoDB
 
-This project is an E-commerce API developed using Express with TypeScript, MongoDB with Mongoose for data management, and Joi/Zod for validation.
+This project is an e-commerce API developed using Express and TypeScript, integrated with MongoDB using Mongoose for effective data management. Data integrity is ensured through validation using Joi.
 
 ## Project Setup
 
@@ -16,25 +16,25 @@ Ensure you have the following installed on your system:
 
 1. **Clone the repository:**
 
-    ```sh
-    git clone <repository-url>
-    cd <repository-directory>
-    ```
+   ```bash
+   git clone https://github.com/alifahmednowshad/mongoose-assignment-2.git
+   cd mongoose-assignment-2
+   ```
 
 2. **Install dependencies:**
 
-    ```sh
-    npm install
-    ```
+   ```sh
+   npm install
+   ```
 
 3. **Set up environment variables:**
 
-    Create a `.env` file in the root directory and add the following variables:
+   Create a `.env` file in the root directory and add the following variables:
 
-    ```env
-    PORT=5000
-    MONGO_URI=<your-mongodb-uri>
-    ```
+   ```env
+   PORT=5000
+   MONGO_URI=<your-mongodb-uri>
+   ```
 
 ## Running the Application
 
@@ -42,3 +42,8 @@ Ensure you have the following installed on your system:
 
 ```sh
 npm run dev
+```
+
+
+
+# Thank You by developer Alif Ahmed
