@@ -1,4 +1,4 @@
-# E-commerce API with Express, TypeScript, and MongoDB
+# E-commerce API with Express, TypeScript & Mongoose
 
 This project is an e-commerce API developed using Express and TypeScript, integrated with MongoDB using Mongoose for effective data management. Data integrity is ensured through validation using Joi.
 
@@ -46,4 +46,5 @@ npm run dev
 
 
 
-# Thank You by developer Alif Ahmed
+## Thank You by developer Alif Ahmed
+
